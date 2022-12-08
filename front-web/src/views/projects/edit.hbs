@@ -1,0 +1,83 @@
+<div class="container p-4">
+    <h1 class="text-center"> Miembros</h1>
+    <div class="row mt-20">
+        <div class="col-md-12 mx-auto">
+            <div class="card ">
+                <div class="card-header " style="background-color: #0068c9">
+                     {{#if isOwned}}
+                    <a href="" class="btn btn-sm btn-light float-right" data-toggle="modal" data-target="#ModalCrear">
+                        <span>
+                            <i class="fa fa-plus " style="color: #fbaf32"></i>
+                        </span>
+                        &nbsp;
+                        Agregar
+                    </a>
+                    {{/if}}
+                    <a href="/projects/show/{{project.id}}" class="btn btn-danger btn-m  cursor-pointer">
+                        <span>
+                            <i class="fas fa-undo" style="color: #faf8f5"></i>
+                        </span>
+                        &nbsp;Volver
+                    </a>
+                </div>
+                <div class="card-body table-responsive bg-white ">
+                    <input type="text" class="form-control" value="{{project.id}}" name="prjId" hidden>
+                    <table class="table ui celled table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Username</th>
+                                <th scope="col">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each members}}
+                            <tr>
+                                <td>{{member}}</td>
+                                <td>
+                                    <form action="/projects/deletemember/{{id}}" method="POST">
+                                        <div class="form-group">
+                                            <button class="btn btn-danger btn-sm">
+                                                X
+                                            </button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal" id="ModalCrear" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form role="form" action="/projects/addmember/{{project.id}}" method="POST" >
+                <!-- Modal Header -->
+                <div class="modal-header" style="background:#0068c9">
+                    <h4 class="modal-title" style="color: white;">Agregar Miembro</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                 <div class="modal-body">                
+                    <div class="row">
+                        <div class="col ">
+                            <label class="form-label" style="color: black">UserName:</label>
+                            <input type="text" class="form-control" name="username" placeholder="Username" autofocus>             
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary"
+                    >Guardar</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
